@@ -6,6 +6,7 @@ package com.mycompany.filtro;
 
 import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
+import java.util.ArrayList;
 
 import com.mycompany.filtro.Sector;
 
@@ -37,6 +38,10 @@ public class PresentacionFiltro extends Thread {
         }
         
         return res;
+    }
+    
+    public void enviarOfertas(ArrayList ofertas){
+    
     }
 
     ///Main

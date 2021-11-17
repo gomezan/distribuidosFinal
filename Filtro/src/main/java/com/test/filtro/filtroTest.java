@@ -29,18 +29,29 @@ public class filtroTest {
 
             ZMQ.Socket socket = context.createSocket(SocketType.REQ);
             socket.connect("tcp://localhost:5555");
-
-            for (int requestNbr = 0; requestNbr != 10; requestNbr++) {
+                
+               //Se suscribe
                 String request = "gomezan,97080703620,subscribir";
-                System.out.println("Sending Hello " + requestNbr);
-                socket.send(request.getBytes(ZMQ.CHARSET), 0);
+                System.out.println("Sending Hello ");
+                socket.send( request.getBytes(ZMQ.CHARSET), 0);
 
                 byte[] reply = socket.recv(0);
-                System.out.println(
-                    "Received " + new String(reply, ZMQ.CHARSET) + " " +
-                    requestNbr
-                );
-            }
+                System.out.println("Received " + new String(reply, ZMQ.CHARSET));
+                
+                
+                //guardar oferta
+                for(int i=0; i<10;i++){
+                
+                String request2 = "gomezan,97080703620,agregarOferta,entrenador";
+                System.out.println("Sending Hello ");
+                socket.send( request2.getBytes(ZMQ.CHARSET), 0);
+
+                byte[] reply2 = socket.recv(0);
+                System.out.println("Received " + new String(reply2, ZMQ.CHARSET));
+                
+                }
+                
+            
         }
     }
     

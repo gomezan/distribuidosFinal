@@ -22,8 +22,8 @@ public class filtro {
     private boolean modo = false;
     private static String puertoSector = "5556";
     private static  PresentacionFiltro presentacion=new PresentacionFiltro();
-    private ArrayList<String> listaOfertas = new ArrayList<String>();
-    private ArrayList<String> listaSolicitudes = new ArrayList<String>();
+    private static ArrayList<String> listaOfertas = new ArrayList<String>();
+    private static ArrayList<String> listaSolicitudes = new ArrayList<String>();
 		
 
     ///Constructor
@@ -51,7 +51,13 @@ public class filtro {
     }
     
     public static void agregarOferta(String oferta){
-        System.out.println("En proceso");
+        listaOfertas.add(oferta);
+        if(listaOfertas.size()==10){
+          filtro.presentacion.enviarOfertas(listaOfertas);
+          listaOfertas = new ArrayList<String>();
+        }
+        System.out.println(listaOfertas.toString());
+
     }
     
        
