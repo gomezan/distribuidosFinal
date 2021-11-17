@@ -17,32 +17,30 @@ import org.zeromq.ZContext;
 public class Sector  extends Thread {
     
     ///Atributos
-    private static String puertoSector;
     
      ///Constructor
-    public Sector(String nombre){
-    this.puertoSector=nombre;     
+    public Sector(){
+         System.out.println(" iniciado sector ");
     }
 
     ///Métodos
-    public String getNombre() {
-        return puertoSector;
-    }
-
-    public void setNombre(String nombre) {
-        this.puertoSector = nombre;
+  
+    
+    public void enviarMensajeSuscripcion(String mensaje){
+         System.out.println(mensaje);
     }
     
     //MAIN
     @Override
     public void run() {
         
-        System.out.println(" iniciado "+this.puertoSector+" sector ");
-        
+        System.out.println(" iniciado sector ");
+       
+     
         //  Prepare our context and publisher
         try (ZContext context = new ZContext()) {
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
-            publisher.bind(this.puertoSector);
+            publisher.bind("tcp://*:5556");
             //publisher.bind("ipc://weather");
 
             //  Initialize random number generator

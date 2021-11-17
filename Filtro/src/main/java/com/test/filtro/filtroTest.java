@@ -31,7 +31,7 @@ public class filtroTest {
             socket.connect("tcp://localhost:5555");
 
             for (int requestNbr = 0; requestNbr != 10; requestNbr++) {
-                String request = "Hello1";
+                String request = "gomezan,97080703620,subscribir";
                 System.out.println("Sending Hello " + requestNbr);
                 socket.send(request.getBytes(ZMQ.CHARSET), 0);
 
