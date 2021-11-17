@@ -23,8 +23,8 @@ import org.zeromq.ZContext;
 //
 public class SectorTest
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args){
+        
         try (ZContext context = new ZContext()) {
             //  Socket to talk to server
             System.out.println("Collecting updates from weather server");

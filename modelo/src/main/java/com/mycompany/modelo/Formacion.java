@@ -5,12 +5,13 @@
 package com.mycompany.modelo;
 
 import com.mycompany.modelo.Capacidad;
+import java.io.Serializable;
 
 /**
  *
  * @author Guatavita
  */
-public class Formacion extends Capacidad {
+public class Formacion extends Capacidad implements Serializable {
     
      //Atributos
     private String institucion;

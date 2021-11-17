@@ -6,12 +6,13 @@ package com.mycompany.modelo;
 
 import java.util.ArrayList;
 import com.mycompany.modelo.Capacidad;
+import java.io.Serializable;
 
 /**
  *
  * @author Guatavita
  */
-public class Aspirante {
+public class Aspirante implements Serializable {
     
     //Atributos
     private int codigo;

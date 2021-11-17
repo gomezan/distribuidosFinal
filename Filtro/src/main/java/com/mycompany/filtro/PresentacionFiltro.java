@@ -64,6 +64,8 @@ public class PresentacionFiltro extends Thread {
                     System.out.println(
                             "Received : [" + new String(reply, ZMQ.CHARSET) + "]"
                     );
+                    
+                    sector.enviarMensajeSuscripcion("100", "10001 ");
 
                     String response = "Hello, world!";
                     socket.send(response.getBytes(ZMQ.CHARSET), 0);

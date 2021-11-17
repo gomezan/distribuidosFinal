@@ -10,8 +10,9 @@ package com.mycompany.modelo;
  */
 
 import com.mycompany.modelo.Aspirante;
+import java.io.Serializable;
 
-public class Solicitud {
+public class Solicitud implements Serializable {
     
     //Atributos
     private int codigo;

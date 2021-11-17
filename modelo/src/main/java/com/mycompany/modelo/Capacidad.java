@@ -4,11 +4,13 @@
  */
 package com.mycompany.modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Guatavita
  */
-public class Capacidad {
+public class Capacidad implements Serializable {
     
      //Atributos
     private int codigo;

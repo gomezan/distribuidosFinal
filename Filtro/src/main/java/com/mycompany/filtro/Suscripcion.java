@@ -14,29 +14,33 @@ import org.zeromq.ZContext;
  *
  * @author Guatavita
  */
-public class Suscripcion  extends Thread {
-    
+public class Suscripcion extends Thread {
+
     ///Atributos
-    
-     ///Constructor
-    public Suscripcion(){
-         System.out.println(" Suscripción iniciado ");
+    private ZMQ.Socket publisher;
+
+    ///Constructor
+    public Suscripcion() {
+        System.out.println(" Suscripción iniciado ");
+        try (ZContext context = new ZContext()) {
+            this.publisher = context.createSocket(SocketType.PUB);
+            publisher.bind("tcp://*:5556");
+        }
     }
 
     ///Métodos
-  
-    
-    public void enviarMensajeSuscripcion(String mensaje){
-         System.out.println(mensaje);
+    public void enviarMensajeSuscripcion(String mensaje, String topic) {
+        System.out.println(mensaje);
+        String update = String.format(
+                "%05d %d", topic, mensaje
+        );
+        publisher.send(update, 0);
     }
-    
+
     //MAIN
     @Override
     public void run() {
-        
-        System.out.println(" iniciado sector ");
-       
-     
+
         //  Prepare our context and publisher
         try (ZContext context = new ZContext()) {
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
@@ -52,11 +56,10 @@ public class Suscripcion  extends Thread {
                 temperature = srandom.nextInt(215) - 80 + 1;
 
                 System.out.println(zipcode);
-                
-                
+
                 //  Send message to all subscribers
                 String update = String.format(
-                    "%05d %d", zipcode, temperature
+                        "%05d %d", zipcode, temperature
                 );
                 publisher.send(update, 0);
             }
