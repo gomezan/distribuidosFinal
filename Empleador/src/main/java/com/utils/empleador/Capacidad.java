@@ -13,4 +13,22 @@ public class Capacidad {
      //Atributos
     private int codigo;
     
+    //Constructor
+
+    public Capacidad(int codigo) {
+        this.codigo = codigo;
+    }
+    
+    //Metodos
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
+    
+    
 }

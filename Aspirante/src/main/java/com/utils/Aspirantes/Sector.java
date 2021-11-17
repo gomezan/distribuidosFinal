@@ -2,46 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.utils.empleador;
-
-import com.utils.empleador.Capacidad;
+package com.utils.Aspirantes;
 
 /**
  *
  * @author Guatavita
  */
-public class Habilidad extends Capacidad{
+public class Sector {
     
-     //Atributos
-    private String nombre;
-    private int nivel;
- 
+    private int codigo;
+    private String nombre; 
     
     //Constructor
-
-    public Habilidad(int codigo, String nombre, int nivel) {
-        super(codigo);
+    public Sector(int codigo, String nombre) {
+        this.codigo = codigo;
         this.nombre = nombre;
-        this.nivel = nivel;
     }
-    
-     //Metodos
+        
+    //Metodos
+
+    public int getCodigo() {
+        return codigo;
+    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getNivel() {
-        return nivel;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
     
-     
+    
 }

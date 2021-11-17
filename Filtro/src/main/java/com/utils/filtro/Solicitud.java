@@ -2,40 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.utils.empleador;
+package com.utils.filtro;
 
 /**
  *
  * @author Guatavita
  */
-public class Sector {
+
+import com.utils.filtro.Aspirante;
+
+public class Solicitud {
     
+    //Atributos
     private int codigo;
-    private String nombre; 
+    private Aspirante aspirante;
     
     //Constructor
-    public Sector(int codigo, String nombre) {
+
+    public Solicitud(int codigo) {
         this.codigo = codigo;
-        this.nombre = nombre;
     }
-        
+    
     //Metodos
 
     public int getCodigo() {
         return codigo;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    
     
     
 }
