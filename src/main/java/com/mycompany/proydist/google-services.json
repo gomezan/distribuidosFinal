@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "770742967843",
+    "project_id": "distri-76671",
+    "storage_bucket": "distri-76671.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770742967843:android:3b97f672e1e095f15e1b96",
+        "android_client_info": {
+          "package_name": "com.mycompany.proydist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770742967843-kc1k961e1r9p3kpmhl1ga7f6noe7fb90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSgS-kINgV8U-QFoddYV6LHK2M2MI58ms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770742967843-kc1k961e1r9p3kpmhl1ga7f6noe7fb90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
