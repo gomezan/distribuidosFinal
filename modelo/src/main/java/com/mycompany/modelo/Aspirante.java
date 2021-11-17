@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.utils.filtro;
+package com.mycompany.modelo;
 
 import java.util.ArrayList;
+import com.mycompany.modelo.Capacidad;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Aspirante {
     private String correo;
     private String direccion;
     private static ArrayList<Sector> listaSector = new ArrayList<Sector>();
+    private static ArrayList<Capacidad> listaCapacidad = new ArrayList<Capacidad>();
     
     //Constructor
 

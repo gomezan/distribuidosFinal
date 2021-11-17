@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.utils.Aspirantes;
+package com.mycompany.modelo;
 
-import com.utils.Aspirantes.Capacidad;
+import com.mycompany.modelo.Capacidad;
 
 /**
  *

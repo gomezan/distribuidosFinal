@@ -14,13 +14,13 @@ import org.zeromq.ZContext;
  *
  * @author Guatavita
  */
-public class Sector  extends Thread {
+public class Suscripcion  extends Thread {
     
     ///Atributos
     
      ///Constructor
-    public Sector(){
-         System.out.println(" iniciado sector ");
+    public Suscripcion(){
+         System.out.println(" Suscripción iniciado ");
     }
 
     ///Métodos

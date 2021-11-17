@@ -11,10 +11,14 @@ package com.mycompany.filtro;
 import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import com.mycompany.filtro.PresentacionFiltro;
+import com.mycompany.modelo.Oferta;
+import com.mycompany.modelo.Sector;
+import com.mycompany.modelo.Empleador;
 
 public class filtro {
 
@@ -75,8 +79,28 @@ public class filtro {
 
             while (!Thread.currentThread().isInterrupted()) {
                 // Block until a message is received
+                
+                
                 byte[] reply = socket.recv(0);
-
+                
+                Oferta ofer=new Oferta();
+                // Print the message
+                ByteArrayInputStream bs= new ByteArrayInputStream(reply); // bytes es el byte[]
+                try (
+                ObjectInputStream is = new ObjectInputStream(bs);) {                 
+                    ofer = (Oferta)is.readObject();
+                } catch (IOException ioe) {
+                    System.out.println(ioe);
+                }
+                
+                System.out.println(ofer.getCodigo());
+                System.out.println(ofer.getEmpleador().getNombre());
+                
+                
+                String response = "NOK";
+                socket.send(response.getBytes(ZMQ.CHARSET), 0); 
+                
+                /*
                 if (reply.length != 0) {
                     
                     String entrada=new String(reply, ZMQ.CHARSET);
@@ -110,7 +134,7 @@ public class filtro {
                      socket.send(response.getBytes(ZMQ.CHARSET), 0); 
                     }
                     
-                }
+                }*/
 
             }
         }

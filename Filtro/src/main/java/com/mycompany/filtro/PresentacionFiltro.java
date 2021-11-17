@@ -8,7 +8,7 @@ import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
 import java.util.ArrayList;
 
-import com.mycompany.filtro.Sector;
+import com.mycompany.filtro.Suscripcion;
 
 /**
  *
@@ -17,13 +17,14 @@ import com.mycompany.filtro.Sector;
 public class PresentacionFiltro extends Thread {
 
     ///Atributos
-    private static Sector sector;
+    private static Suscripcion sector;
 
     ///Constructor
 
     public PresentacionFiltro() {
     
-        this.sector= new Sector();
+        this.sector= new Suscripcion();
+        //this.sector.start();
     }
     
     
