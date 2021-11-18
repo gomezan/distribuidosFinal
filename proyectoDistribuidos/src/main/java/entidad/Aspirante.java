@@ -30,6 +30,10 @@ public class Aspirante {
         this.correo = correo;
         this.direccion = direccion;
     }
+
+    public Aspirante() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
    
     //Metodos
