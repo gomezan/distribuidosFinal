@@ -70,9 +70,8 @@ public class Cliente {
                 socket.send(data);
                 
                 byte[] reply = socket.recv(0);
-                String encoded = Base64.getEncoder().encodeToString(reply);
                 System.out.println(
-                    "Received " + new String(reply, ZMQ.CHARSET) + " " +encoded
+                    "Received " + new String(reply, ZMQ.CHARSET) 
                 );
             //}
         }

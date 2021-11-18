@@ -29,8 +29,8 @@ public class DBControl {
         ){
             while(rs.next()){
                 //ps.executeUpdate();
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
+               // System.out.println(rs.getString(1));
+                //System.out.println(rs.getString(2));
             }
         }catch(SQLException ex){
             Logger lgr = Logger.getLogger(DBControl.class.getName());
@@ -51,7 +51,7 @@ public class DBControl {
         ){
             while(rs.next()){
                 Oferta aux = new Oferta();
-                System.out.println(rs.getString(1));
+                //System.out.println(rs.getString(1));
                 var auxN = ((Number) rs.getObject(1)).intValue();
                 aux.setId(auxN);
                 aux.setCargo(rs.getString(2));
@@ -60,8 +60,8 @@ public class DBControl {
                 auxN = ((Number) rs.getObject(4)).intValue();
                 aux.setIDSector(auxN);
                 
-                System.out.println(rs.getString(3));
-                System.out.println(rs.getString(4));
+                //System.out.println(rs.getString(3));
+                //System.out.println(rs.getString(4));
                 ofertasBD.add(aux);
                 }
         }catch(SQLException ex){
@@ -80,7 +80,7 @@ public class DBControl {
             while(rs.next()){
                 Solicitud aux = new Solicitud();
                 Aspirante auxAs = new Aspirante();
-                System.out.println(rs.getString(1));
+                //System.out.println(rs.getString(1));
                 var auxN = ((Number) rs.getObject(1)).intValue();
                 aux.setCodigo(auxN);
                 auxN = ((Number) rs.getObject(3)).intValue();
@@ -93,7 +93,7 @@ public class DBControl {
                 auxAs.setTelefono(auxN);
                 auxAs.setCorreo(rs.getString(8));
                 auxAs.setDireccion(rs.getString(9));               
-                System.out.println(rs.getString(5));
+                //System.out.println(rs.getString(5));
                 aux.setAspirante(auxAs);
                 solicitudesBD.add(aux);             
                 }
