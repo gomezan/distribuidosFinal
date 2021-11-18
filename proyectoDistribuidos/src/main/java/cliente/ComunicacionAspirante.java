@@ -9,7 +9,7 @@ package cliente;
  * @author Guatavita
  */
 
-import static cliente.ComunicacionEmpleador.suscribirAjustes;
+
 import java.util.StringTokenizer;
 import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
@@ -38,7 +38,7 @@ public class ComunicacionAspirante {
             ZMQ.Socket subscriber  = context.createSocket(SocketType.SUB);
             subscriber.connect("tcp://localhost:5556");
 
-            String filter = "Ingenieria ";
+            String filter = "IngenieriaSolicitud ";
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
             
             //  Process 10 updates
@@ -101,11 +101,11 @@ public class ComunicacionAspirante {
         try (ZContext context = new ZContext()) {
             
            //  Comunicación Filtro
-            System.out.println("Connecting to hello world server");
+            System.out.println("aspirante comunicandose");
             ZMQ.Socket socket = context.createSocket(SocketType.REQ);
             socket.connect("tcp://localhost:5555");
  
-            //Envia oferta
+            //Envia solicitud
             String request2 = "gomezan-97080703620-agregarSolicitud-";
          
             byte[] encabezado = request2.getBytes(ZMQ.CHARSET);
