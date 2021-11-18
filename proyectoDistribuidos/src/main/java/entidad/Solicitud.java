@@ -48,6 +48,5 @@ public class Solicitud implements Serializable{
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-    
+    } 
 }

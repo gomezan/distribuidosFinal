@@ -118,4 +118,38 @@ public class DBControl {
         }
         return devolver ;
     }
+    
+    public static void addOferta(Oferta ofert) {     
+        String cargo = ofert.getCargo();
+        int idEmpleador = ofert.getIDempleador();
+        int idSector = ofert.getIDSector();
+        try(	            
+            Connection  conexDHT= (Connection) DBconnect.getConnection();
+            PreparedStatement ps = (PreparedStatement) conexDHT.prepareStatement("INSERT INTO `dht`.`ofertas` ( `Cargo`, `IDEmpleador`, `IDSector`) VALUES ( '"+cargo+"', '"+idEmpleador+"', '"+idSector+"');");
+            ResultSet rs= ps.executeQuery();
+        ){
+        while(rs.next()){
+                ps.executeUpdate();
+        } 
+        }catch(SQLException ex){
+                    System.out.println(ex);
+        }
+    }
+   
+    public static void addSolicitud(Solicitud sol) {     
+        int idEmpleador = sol.getCodigo();
+        int idSector = sol.getIdSector();
+        int idAspirante = 1;
+        try(	            
+            Connection  conexDHT= (Connection) DBconnect.getConnection();
+            PreparedStatement ps = (PreparedStatement) conexDHT.prepareStatement("INSERT INTO `dht`.`solicitud` (`idAspirante`, `idSector`) VALUES ('"+idAspirante+"', '"+idSector+"');");
+            ResultSet rs= ps.executeQuery();
+        ){
+        while(rs.next()){
+                ps.executeUpdate();
+        } 
+        }catch(SQLException ex){
+                    System.out.println(ex);
+        }
+    }
 }
