@@ -41,6 +41,10 @@ public class PresentacionFiltro extends Thread {
     public void enviarOfertas(ArrayList ofertas){
     
     }
+    
+    public void enviarSolicitudes(ArrayList solicitudes){
+    
+    }
 
     ///Main
     @Override

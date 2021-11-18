@@ -15,10 +15,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-
 import entidad.Oferta;
 import entidad.Sector;
-
+import entidad.Solicitud;
 
 public class filtro {
 
@@ -28,7 +27,7 @@ public class filtro {
     private static PresentacionFiltro presentacion = new PresentacionFiltro();
     private static Suscripcion subscribe = new Suscripcion();
     private static ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-    private static ArrayList<String> listaSolicitudes = new ArrayList<String>();
+    private static ArrayList<Solicitud> listaSolicitudes = new ArrayList<Solicitud>();
 
     ///Constructor
     public filtro() {
@@ -37,24 +36,28 @@ public class filtro {
         //this.presentacion.start();
     }
 
+    ///Métodos
     private static void imprimirOfertas() {
 
         for (Oferta offer : listaOfertas) {
-   
+
             System.out.println("*****************************");
             System.out.println(offer.getId());
             System.out.println(offer.getCargo());
         }
     }
 
-    ///Métodos
-    private static void configurarPresentacion() {
+    private static void imprimirSolicitudes() {
 
-        filtro.presentacion = new PresentacionFiltro();
-        filtro.presentacion.start();
+        for (Solicitud sol : listaSolicitudes) {
+
+            System.out.println("*****************************");
+            System.out.println(sol.getCodigo());
+            System.out.println(sol.getIdSector());
+        }
     }
 
-   
+
     public static boolean autentificar(String entrada) {
 
         String[] parts = entrada.split("-");
@@ -65,7 +68,6 @@ public class filtro {
         return (filtro.presentacion.autentificar(user, password));
     }
 
-    
     public static void agregarOferta(byte[] oferta) throws ClassNotFoundException {
 
         Oferta ofer = new Oferta();
@@ -83,8 +85,30 @@ public class filtro {
             filtro.presentacion.enviarOfertas(listaOfertas);
             listaOfertas = new ArrayList<Oferta>();
         }
-        
+
         imprimirOfertas();
+
+    }
+    
+    public static void agregarSolicitud(byte[] solucion) throws ClassNotFoundException {
+
+        Solicitud sol = new Solicitud();
+        // Print the message
+        ByteArrayInputStream bs = new ByteArrayInputStream(solucion); // bytes es el byte[]
+        try (
+                ObjectInputStream is = new ObjectInputStream(bs);) {
+            sol = (Solicitud) is.readObject();
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
+
+        listaSolicitudes.add(sol);
+        if (listaSolicitudes.size() == 10) {
+            filtro.presentacion.enviarSolicitudes(listaSolicitudes);
+            listaSolicitudes = new ArrayList<Solicitud>();
+        }
+
+        imprimirSolicitudes();
 
     }
 

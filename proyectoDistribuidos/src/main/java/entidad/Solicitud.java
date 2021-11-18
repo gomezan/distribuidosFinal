@@ -4,47 +4,43 @@
  */
 package entidad;
 
+
 /**
  *
- * @author Guatavita
+ * @author TUCHYS
  */
-
-
-import java.io.Serializable;
-
-public class Solicitud implements Serializable {
-    
-    //Atributos
+public class Solicitud {
+      //Atributos
     private int codigo;
-    private int idAspirante;
-    private int IDSector;
+    private int idSector;
+    private Aspirante aspirante;
     
     //Constructor
 
-    public Solicitud(int codigo, int idAspirante, int IDSector) {
-        this.codigo = codigo;
-        this.idAspirante = idAspirante;
-        this.IDSector = IDSector;
+    public Solicitud() {
     }
 
-    public Solicitud() {
-        
+    public Solicitud(int codigo) {
+        this.codigo = codigo;
     }
-  
+    
+    public int getIdSector() {
+        return idSector;
+    }
+
+    public void setIdSector(int idSector) {
+        this.idSector = idSector;
+    }
+
+    public Aspirante getAspirante() {
+        return aspirante;
+    }
 
     //Metodos
-    public int getIDSector() {
-        return IDSector;
+    public void setAspirante(Aspirante aspirante) {    
+        this.aspirante = aspirante;
     }
 
-      public Solicitud(int codigo) {
-        this.codigo = codigo;
-    }
-    
-    public int getIdAspirante() {
-        return idAspirante;
-    }
-    
     public int getCodigo() {
         return codigo;
     }
@@ -52,7 +48,5 @@ public class Solicitud implements Serializable {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    
-    
     
 }

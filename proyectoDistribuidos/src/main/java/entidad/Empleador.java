@@ -1,54 +1,51 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package entidad;
 
-/**
- *
- * @author Guatavita
- */
-
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Empleador implements Serializable {
-    
-     //Atributos
+/**
+ *
+ * @author TUCHYS
+ */
+public class Empleador {
     private int codigo;
-    private String nombre;
-   
-    
-    //Constructor
+    private String razonSocial;
+    private static ArrayList<Sector> listaSector = new ArrayList<Sector>();
 
-    public Empleador(int codigo, String nombre) {
+    public Empleador() {
+    }
+
+    public Empleador(int codigo, String razonSocial) {
         this.codigo = codigo;
-        this.nombre = nombre;
+        this.razonSocial = razonSocial;
     }
     
-     //Metodos
-
     public int getCodigo() {
         return codigo;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
- 
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getRazonSocial() {
+        return razonSocial;
     }
 
-    
-    
-    
-    
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public static ArrayList<Sector> getListaSector() {
+        return listaSector;
+    }
+
+    public static void setListaSector(ArrayList<Sector> listaSector) {
+        Empleador.listaSector = listaSector;
+    }
+
 }
