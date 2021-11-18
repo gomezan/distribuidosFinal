@@ -19,7 +19,6 @@ public class Aspirante {
     private int telefono;
     private String correo;
     private String direccion;
-    private static ArrayList<Sector> listaSector = new ArrayList<Sector>();
     
     //Constructor
 
@@ -59,9 +58,6 @@ public class Aspirante {
         return direccion;
     }
 
-    public static ArrayList<Sector> getListaSector() {
-        return listaSector;
-    }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -85,10 +81,6 @@ public class Aspirante {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public static void setListaSector(ArrayList<Sector> listaSector) {
-        Aspirante.listaSector = listaSector;
     }
 
     
