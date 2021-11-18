@@ -4,12 +4,13 @@
  */
 package entidad;
 
+import java.io.Serializable;
 
 /**
  *
  * @author TUCHYS
  */
-public class Solicitud {
+public class Solicitud implements Serializable{
       //Atributos
     private int codigo;
     private int idSector;
