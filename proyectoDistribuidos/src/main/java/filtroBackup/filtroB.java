@@ -6,8 +6,9 @@
  *
  * @author Guatavita
  */
-package filtro;
+package filtroBackup;
 
+import filtro.*;
 import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
 import java.util.ArrayList;
@@ -18,8 +19,10 @@ import java.io.ObjectInputStream;
 import entidad.Oferta;
 import entidad.Sector;
 import entidad.Solicitud;
+import org.zeromq.SocketType;
+import static org.zeromq.ZMQ.context;
 
-public class filtro {
+public class filtroB extends filtro {
 
     ///Atributos
     private boolean modo = false;
@@ -29,91 +32,43 @@ public class filtro {
     private static ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
     private static ArrayList<Solicitud> listaSolicitudes = new ArrayList<Solicitud>();
 
+    private static boolean modalidad = false;
+
     ///Constructor
-    public filtro() {
-
-    }
-
-    ///Métodos
-    private static void imprimirOfertas() {
-
-        for (Oferta offer : listaOfertas) {
-
-            System.out.println("*****************************");
-            System.out.println(offer.getId());
-            System.out.println(offer.getCargo());
-        }
-    }
-
-    private static void imprimirSolicitudes() {
-
-        for (Solicitud sol : listaSolicitudes) {
-
-            System.out.println("*****************************");
-            System.out.println(sol.getCodigo());
-            System.out.println(sol.getIdSector());
-        }
-    }
-
-    public static boolean autentificar(String entrada) {
-
-        String[] parts = entrada.split("-");
-
-        String user = parts[0];
-        String password = parts[1];
-
-        return (filtro.presentacion.autentificar(user, password));
-    }
-
-    public static void agregarOferta(byte[] oferta) throws ClassNotFoundException {
-
-        Oferta ofer = new Oferta();
-        // Print the message
-        ByteArrayInputStream bs = new ByteArrayInputStream(oferta); // bytes es el byte[]
-        try (
-                ObjectInputStream is = new ObjectInputStream(bs);) {
-            ofer = (Oferta) is.readObject();
-        } catch (IOException ioe) {
-            System.out.println(ioe);
-        }
-
-        listaOfertas.add(ofer);
-        if (listaOfertas.size() == 10) {
-            filtro.presentacion.enviarOfertas(listaOfertas);
-            listaOfertas = new ArrayList<Oferta>();
-        }
-
-        imprimirOfertas();
-
-    }
-
-    public static void agregarSolicitud(byte[] solucion) throws ClassNotFoundException {
-
-        Solicitud sol = new Solicitud();
-        // Print the message
-        ByteArrayInputStream bs = new ByteArrayInputStream(solucion); // bytes es el byte[]
-        try (
-                ObjectInputStream is = new ObjectInputStream(bs);) {
-            sol = (Solicitud) is.readObject();
-        } catch (IOException ioe) {
-            System.out.println(ioe);
-        }
-
-        listaSolicitudes.add(sol);
-        if (listaSolicitudes.size() == 10) {
-            filtro.presentacion.enviarSolicitudes(listaSolicitudes);
-            listaSolicitudes = new ArrayList<Solicitud>();
-        }
-
-        imprimirSolicitudes();
+    public filtroB() {
 
     }
 
     //MAIN
     public static void main(String[] args) throws Exception {
-        System.out.println("Filtro iniciado");
 
-        //configurarPresentacion();
+        while (!modalidad) {
+
+            System.out.println("Filtro Backup iniciado");
+            try (ZContext context = new ZContext()) {
+                ZMQ.Socket healthSocket = context.createSocket(ZMQ.REQ);
+                healthSocket.connect("tcp://localhost:5559");
+                healthSocket.setReceiveTimeOut(1000);
+
+                String request = "Health";
+                System.out.println("are you ok?");
+                healthSocket.send(request.getBytes(ZMQ.CHARSET), 0);
+
+                byte[] reply = healthSocket.recv(0);
+
+                if (reply != null) {
+
+                    System.out.println(
+                            "Received " + new String(reply, ZMQ.CHARSET));
+
+                } else {
+
+                    modalidad = true;
+                }
+            }
+
+        }
+        System.out.println("Filtro iniciado");
         presentacion.start();
         subscribe.start();
 
@@ -121,18 +76,13 @@ public class filtro {
             // Socket to talk to clients
             ZMQ.Socket socket = context.createSocket(ZMQ.REP);
             socket.bind("tcp://*:5555");
-            socket.setReceiveTimeOut(50);
-
-            ZMQ.Socket socketHealth = context.createSocket(ZMQ.REP);
-            socketHealth.bind("tcp://*:5559");
-            socketHealth.setReceiveTimeOut(10);
 
             while (!Thread.currentThread().isInterrupted()) {
                 // Block until a message is received
 
                 byte[] reply = socket.recv(0);
 
-                if (reply != null) {
+                if (reply.length != 0) {
 
                     String entrada = new String(reply, ZMQ.CHARSET);
 
@@ -169,17 +119,6 @@ public class filtro {
                         String response = "NOK";
                         socket.send(response.getBytes(ZMQ.CHARSET), 0);
                     }
-
-                }
-
-                byte[] salud = socketHealth.recv(0);
-
-                if (salud != null) {
-                    System.out.println(
-                            "Received " + new String(salud, ZMQ.CHARSET));
-
-                    String response = "OK";
-                    socketHealth.send(response.getBytes(ZMQ.CHARSET), 0);
 
                 }
 

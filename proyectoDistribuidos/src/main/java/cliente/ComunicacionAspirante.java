@@ -106,7 +106,7 @@ public class ComunicacionAspirante {
             socket.connect("tcp://localhost:5555");
  
             //Envia oferta
-            String request2 = "gomezan-97080703620-agregarOferta-";
+            String request2 = "gomezan-97080703620-agregarSolicitud-";
          
             byte[] encabezado = request2.getBytes(ZMQ.CHARSET);
             socket.send(encabezado, 0);

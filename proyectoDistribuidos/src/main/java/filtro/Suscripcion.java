@@ -30,7 +30,9 @@ public class Suscripcion extends Thread {
     public void run() {
 
         try (ZContext context = new ZContext()) {
-
+        
+             System.out.println("suscripcion iniciado");        
+        
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
             publisher.bind("tcp://*:5556");
 
