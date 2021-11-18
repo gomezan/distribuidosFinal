@@ -14,23 +14,33 @@ import org.zeromq.ZMQ;
  */
 public class Publicador extends Thread {
 
-    private ZMQ.Socket publisher;
+    public static void main(String[] args) {
 
-   public Publicador() {
-        System.out.println(" Suscripción iniciado ");
         try (ZContext context = new ZContext()) {
-            this.publisher = context.createSocket(SocketType.PUB);
-            this.publisher.bind("tcp://*:5556");
+
+            ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
+            publisher.bind("tcp://*:5556");
+
+            ZMQ.Socket socket = context.createSocket(SocketType.REP);
+            socket.bind("tcp://*:5558");
+            
+            while (!Thread.currentThread().isInterrupted()) {
+                //  Get values that will fool the boss
+              
+                byte[] reply = socket.recv(0);
+                publisher.send(reply, 0);
+                
+                String response = "OK";
+                socket.send(response.getBytes(ZMQ.CHARSET), 0);
+
+                
+            }
+            
+          
+            
+         
         }
+
     }
-   
-   public void enviarMensajeSuscripcion(String mensaje, String topic) {
-        System.out.println(mensaje);
-        String update = String.format(
-                "%s %s", topic, mensaje
-        );
-        this.publisher.send(update, 0);
-    }
-   
 
 }

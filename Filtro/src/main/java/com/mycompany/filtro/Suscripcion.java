@@ -21,48 +21,34 @@ public class Suscripcion extends Thread {
 
     ///Constructor
     public Suscripcion() {
-        System.out.println(" Suscripción iniciado ");
-        try (ZContext context = new ZContext()) {
-            this.publisher = context.createSocket(SocketType.PUB);
-            publisher.bind("tcp://*:5556");
-        }
     }
 
     ///Métodos
-    public void enviarMensajeSuscripcion(String mensaje, String topic) {
-        System.out.println(mensaje);
-        String update = String.format(
-                "%05d %d", topic, mensaje
-        );
-        publisher.send(update, 0);
-    }
-
     //MAIN
     @Override
+
     public void run() {
 
-        //  Prepare our context and publisher
         try (ZContext context = new ZContext()) {
+
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
             publisher.bind("tcp://*:5556");
-            //publisher.bind("ipc://weather");
 
-            //  Initialize random number generator
-            Random srandom = new Random(System.currentTimeMillis());
+            ZMQ.Socket socket = context.createSocket(SocketType.REP);
+            socket.bind("tcp://*:5558");
+
             while (!Thread.currentThread().isInterrupted()) {
                 //  Get values that will fool the boss
-                int zipcode, temperature, relhumidity;
-                zipcode = 10000 + srandom.nextInt(10000);
-                temperature = srandom.nextInt(215) - 80 + 1;
 
-                System.out.println(zipcode);
+                byte[] reply = socket.recv(0);
+                publisher.send(reply, 0);
 
-                //  Send message to all subscribers
-                String update = String.format(
-                        "%05d %d", zipcode, temperature
-                );
-                publisher.send(update, 0);
+                String response = "OK";
+                socket.send(response.getBytes(ZMQ.CHARSET), 0);
+
             }
+
         }
+
     }
 }

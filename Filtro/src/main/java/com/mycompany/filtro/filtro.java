@@ -26,6 +26,7 @@ public class filtro {
     private boolean modo = false;
     private static String puertoSector = "5556";
     private static PresentacionFiltro presentacion = new PresentacionFiltro();
+    private static Suscripcion subscribe = new Suscripcion();
     private static ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
     private static ArrayList<String> listaSolicitudes = new ArrayList<String>();
 
@@ -93,6 +94,7 @@ public class filtro {
 
         //configurarPresentacion();
         presentacion.start();
+        subscribe.start();
 
         try (ZContext context = new ZContext()) {
             // Socket to talk to clients

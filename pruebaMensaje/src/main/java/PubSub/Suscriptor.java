@@ -15,17 +15,17 @@ import org.zeromq.ZMQ;
  */
 public class Suscriptor {
     
-    private static ZMQ.Socket subscriber;
+ 
     
     public static void main(String[] args){
     
         try (ZContext context = new ZContext()) {
             //  Socket to talk to server
-            System.out.println("Collecting updates from weather server");
-            subscriber = context.createSocket(SocketType.SUB);
+            System.out.println("Estoy suscrito, espero mensajes");
+            ZMQ.Socket subscriber  = context.createSocket(SocketType.SUB);
             subscriber.connect("tcp://localhost:5556");
 
-            String filter = "Ingenieria ";
+            String filter = "10001 ";
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
             
           

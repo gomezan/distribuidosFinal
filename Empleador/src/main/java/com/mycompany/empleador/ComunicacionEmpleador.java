@@ -28,7 +28,7 @@ import com.mycompany.modelo.Empleador;
 public class ComunicacionEmpleador {
 
     ///Atributos
-    private static ZMQ.Socket subscriber;
+  
     
     //Metodos
     /**
@@ -37,16 +37,15 @@ public class ComunicacionEmpleador {
      */
     public static void suscribirAjustes(String puerto) {
 
-        try (ZContext context = new ZContext()) {
+       try (ZContext context = new ZContext()) {
             //  Socket to talk to server
             System.out.println("Estoy suscrito, espero mensajes");
-            ComunicacionEmpleador.subscriber = context.createSocket(SocketType.SUB);
-            subscriber.connect("tcp://localhost:" + puerto);
+            ZMQ.Socket subscriber  = context.createSocket(SocketType.SUB);
+            subscriber.connect("tcp://localhost:5556");
 
-            //  Subscribe to zipcode, default is NYC, 10001
-            String filter = "10001 ";
+            String filter = "Ingenieria ";
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
-
+            
             //  Process 10 updates
             int update_nbr;
             long total_temp = 0;
@@ -54,22 +53,16 @@ public class ComunicacionEmpleador {
                 //  Use trim to remove the tailing '0' character
                 String string = subscriber.recvStr(0).trim();
 
-                System.out.println(string);
-
                 StringTokenizer sscanf = new StringTokenizer(string, " ");
-                int zipcode = Integer.valueOf(sscanf.nextToken());
-                int temperature = Integer.valueOf(sscanf.nextToken());
+                String topic = sscanf.nextToken();
+                String mensaje = sscanf.nextToken();
+                
+                System.out.println(topic);
+                System.out.println(mensaje);
 
-                total_temp += temperature;
+              
             }
-
-            System.out.println(
-                    String.format(
-                            "Average temperature for zipcode '%s' was %d.",
-                            filter,
-                            (int) (total_temp / update_nbr)
-                    )
-            );
+           
         }
 
     }

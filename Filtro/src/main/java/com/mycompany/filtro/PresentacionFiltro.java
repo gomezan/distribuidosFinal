@@ -17,14 +17,11 @@ import com.mycompany.filtro.Suscripcion;
 public class PresentacionFiltro extends Thread {
 
     ///Atributos
-    private static Suscripcion sector;
 
     ///Constructor
 
     public PresentacionFiltro() {
     
-        this.sector= new Suscripcion();
-        //this.sector.start();
     }
     
     
@@ -65,7 +62,6 @@ public class PresentacionFiltro extends Thread {
                             "Received : [" + new String(reply, ZMQ.CHARSET) + "]"
                     );
                     
-                    sector.enviarMensajeSuscripcion("100", "10001 ");
 
                     String response = "Hello, world!";
                     socket.send(response.getBytes(ZMQ.CHARSET), 0);
