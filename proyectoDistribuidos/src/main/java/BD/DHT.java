@@ -44,6 +44,54 @@ public class DHT {
     public DHT() {
     }
 
+    public static Map<Integer, Oferta> getOfertaSectoS() {
+        return ofertaSectoS;
+    }
+
+    public static void setOfertaSectoS(Map<Integer, Oferta> ofertaSectoS) {
+        DHT.ofertaSectoS = ofertaSectoS;
+    }
+
+    public static Map<Integer, Aspirante> getAspiranteSectorS() {
+        return aspiranteSectorS;
+    }
+
+    public static void setAspiranteSectorS(Map<Integer, Aspirante> aspiranteSectorS) {
+        DHT.aspiranteSectorS = aspiranteSectorS;
+    }
+
+    public static Map<Integer, Solicitud> getSolicitudSector() {
+        return solicitudSector;
+    }
+
+    public static void setSolicitudSector(Map<Integer, Solicitud> solicitudSector) {
+        DHT.solicitudSector = solicitudSector;
+    }
+
+    public static Map<Integer, Solicitud> getSolicitudSectorS() {
+        return solicitudSectorS;
+    }
+
+    public static void setSolicitudSectorS(Map<Integer, Solicitud> solicitudSectorS) {
+        DHT.solicitudSectorS = solicitudSectorS;
+    }
+
+    public List<Solicitud> getSolicitudesBD() {
+        return solicitudesBD;
+    }
+
+    public void setSolicitudesBD(List<Solicitud> solicitudesBD) {
+        this.solicitudesBD = solicitudesBD;
+    }
+
+    public static int getNumServidor() {
+        return NumServidor;
+    }
+
+    public static void setNumServidor(int NumServidor) {
+        DHT.NumServidor = NumServidor;
+    }
+
     public static Map<Integer, Oferta> getOfertaSecto() {
         return ofertaSecto;
     }
