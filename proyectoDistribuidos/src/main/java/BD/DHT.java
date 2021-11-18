@@ -18,13 +18,29 @@ import java.util.Map;
 public class DHT {
     
     static Map<Integer,Oferta> ofertaSecto=new HashMap<>(); 
+    //dht para cada servidor que relaciona oferta con sector
+    static Map<Integer,Oferta> ofertaSectoS=new HashMap<>(); 
+    
+   
     static Map<Integer,Aspirante> aspiranteSector=new HashMap<>();
+     //dht para cada servidor que relaciona aspirante con sector  
+    static Map<Integer,Aspirante> aspiranteSectorS=new HashMap<>();
+    
     static Map<Integer,Solicitud> solicitudSector=new HashMap<>();
+     //dht para cada servidor que relaciona solicitud con sector  
+    static Map<Integer,Solicitud> solicitudSectorS=new HashMap<>();
+    
+    //Instancia conexion BD
     DBconnect dbConn = new DBconnect();
+    //Control de consultas BD
     DBControl dbCont = new DBControl(dbConn);
+    
+    //Lectura de BD almacenado en listas de entidades 
     List<Oferta> ofertasdeBD = DBControl.getOfertas();
     List<Solicitud> solicitudesBD = DBControl.getSolicitudes();
 
+     //Indicador de servidores
+    static int NumServidor = 1;
     public DHT() {
     }
 
@@ -97,4 +113,58 @@ public class DHT {
             solicitudSector.put(sol.getIdSector(), sol);
         }
     }
+    
+    public static void dhtSerOferSector(){
+        ofertaSectoS = new HashMap<>();
+        int tamanio = ofertaSecto.size();
+        int partes = tamanio/3;
+        int indice=0;
+        var ofer = ofertaSecto.values();
+        ofer.forEach((ofet) -> {
+            if((NumServidor == 1) && (indice < partes)){
+                ofertaSectoS.put(ofet.getIDSector(),ofet);
+            }else if((NumServidor == 2) && (indice < partes*2)){
+                ofertaSectoS.put(ofet.getIDSector(),ofet);                
+            }else if((NumServidor == 3) && (indice >= partes*2)){
+                ofertaSectoS.put(ofet.getIDSector(),ofet);                    
+            }      
+        });
+    } 
+    
+    public static void dhtSerAspSector(){
+        aspiranteSectorS=new HashMap<>();
+        int tamanio = aspiranteSector.size();
+        int partes = tamanio/3;
+        int indice=0;
+        var ofer = aspiranteSector.values();
+        ofer.forEach((ofet) -> {
+            if((NumServidor == 1) && (indice < partes)){
+                aspiranteSectorS.put(ofet.getCodigo(),ofet);
+            }else if((NumServidor == 2) && (indice < partes*2)){
+                aspiranteSectorS.put(ofet.getCodigo(),ofet);                
+            }else if((NumServidor == 3) && (indice >= partes*2)){
+                aspiranteSectorS.put(ofet.getCodigo(),ofet);                    
+            }      
+        }); 
+    }
+    
+    public static DHT dhtSerOferSector(DHT dht){
+        solicitudSectorS=new HashMap<>();
+        int tamanio = solicitudSector.size();
+        int partes = tamanio/3;
+        int indice=0;
+        var ofer = solicitudSector.values();
+        ofer.forEach((ofet) -> {
+            if((NumServidor == 1) && (indice < partes)){
+                solicitudSectorS.put(ofet.getIdSector(),ofet);
+            }else if((NumServidor == 2) && (indice < partes*2)){
+                solicitudSectorS.put(ofet.getIdSector(),ofet);                
+            }else if((NumServidor == 3) && (indice >= partes*2)){
+                solicitudSectorS.put(ofet.getIdSector(),ofet);                    
+            }      
+        });
+        NumServidor++;
+        return null;    
+    }
+   
 }
