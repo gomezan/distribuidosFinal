@@ -30,8 +30,8 @@ public class Cliente {
             System.out.println("Connecting to hello world server");
 
             ZMQ.Socket socket = context.createSocket(SocketType.REQ);
-            socket.connect("tcp://25.4.189.185:5555");
-            //socket.connect("tcp://localhost:5555");
+            //socket.connect("tcp://25.4.189.185:5555");
+            socket.connect("tcp://localhost:5555");
             //for (int requestNbr = 0; requestNbr != 10; requestNbr++) {
                 String request = "HOLIIIIIIIIIIIIIIII";
                 System.out.println("Sending Hello " );

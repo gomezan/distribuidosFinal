@@ -45,6 +45,24 @@ public class DHT {
     public DHT() {
     }
 
+        
+    public static void main(String[] args) throws IOException
+    {
+        System.out.println("Corriendo DHT");
+        DBconnect dbConn = new DBconnect();
+        DBControl dbCont = new DBControl(dbConn);
+        
+        List<Oferta> ofertasdeBD = DBControl.getOfertas();   
+        List<Solicitud> solicitudesBD = DBControl.getSolicitudes();
+        
+        DHT.agregarOferta(ofertasdeBD); 
+        DHT.agregarSolicitud(solicitudesBD);
+        Map<Integer,Oferta> ofertaSecto = DHT.getOfertaSecto();
+        Map<Integer,Solicitud> solicitudSector = DHT.getSolicitudSector();
+        
+        match(ofertaSecto, solicitudSector);
+    }
+        
     public static Map<Integer, Oferta> getOfertaSectoS() {
         return ofertaSectoS;
     }
@@ -132,18 +150,7 @@ public class DHT {
     public void setOfertasdeBD(List<Oferta> ofertasdeBD) {
         this.ofertasdeBD = ofertasdeBD;
     }
-    
-    
-    public static void main(String[] args) throws IOException
-    {
-        System.out.println("Corriendo DHT");
-        DBconnect dbConn = new DBconnect();
-        DBControl dbCont = new DBControl(dbConn);
         
-        List<Oferta> ofertasdeBD = DBControl.getOfertas();     
-    }
-    
-    
     public boolean relOferXSec(){ 
         return false;
         
@@ -217,5 +224,25 @@ public class DHT {
         NumServidor++;
         return null;    
     }
-   
+    
+    public static void actualizaOfertas(List<Oferta> ofertas){
+        ofertas.forEach((ofet) -> {
+            DBControl.addOferta(ofet);
+        });   
+    }
+    
+    public static void actualizaSolicitudes(List<Solicitud> solicitudes){
+        solicitudes.forEach((sol) -> {
+            DBControl.addSolicitud(sol);
+        });   
+    }
+    
+    public static void match(Map<Integer,Oferta> mapaOfertas, Map<Integer,Solicitud> mapaSolicitud){
+        //var ofer = ofertaSecto.values();
+        System.out.println("Tamao"+mapaOfertas.size());
+        for ( Integer key : mapaOfertas.keySet() ) {
+            System.out.println("llave "+ key );
+        }
+    }
+    
 }
