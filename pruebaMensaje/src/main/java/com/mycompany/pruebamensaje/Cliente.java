@@ -4,6 +4,9 @@
  */
 package com.mycompany.pruebamensaje;
 
+import DB.DHT;
+import com.mycompany.entidad.Habilidad;
+import com.mycompany.entidad.Oferta;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -11,6 +14,8 @@ import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -42,10 +47,16 @@ public class Cliente {
                 ofer.setCargo("Secretario");
                 ofer.setIDSector(1);
                 ofer.setIDempleador(2);
+                //USO DE MAP
+                DHT dht = new DHT();
+                Map<Integer,Oferta> enviaMap = new HashMap<>();
+                DHT.agregarOferta(dht.getOfertasdeBD());
+                enviaMap = DHT.getOfertaSecto();
+                System.out.println(enviaMap);
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 //ObjectOutputStream os = new ObjectOutputStream(out);
                 try (ObjectOutputStream ois = new ObjectOutputStream(out)) {                 
-                    ois.writeObject(ofer);
+                    ois.writeObject(enviaMap);
                    // out.toByteArray();
                 } catch (IOException ioe) {
                     System.out.println(ioe);

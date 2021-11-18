@@ -1,5 +1,7 @@
 package com.mycompany.pruebamensaje;
 
+import com.mycompany.entidad.Habilidad;
+import com.mycompany.entidad.Oferta;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
