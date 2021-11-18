@@ -78,10 +78,10 @@ public class filtro {
         }
 
         listaOfertas.add(ofer);
-        if (listaOfertas.size() == 10) {
+        //if (listaOfertas.size() == 10) {
             filtro.presentacion.enviarOfertas(listaOfertas);
             listaOfertas = new ArrayList<Oferta>();
-        }
+        //}
 
         imprimirOfertas();
 
@@ -121,11 +121,11 @@ public class filtro {
             // Socket to talk to clients
             ZMQ.Socket socket = context.createSocket(ZMQ.REP);
             socket.bind("tcp://*:5555");
-            socket.setReceiveTimeOut(50);
+            socket.setReceiveTimeOut(500);
 
             ZMQ.Socket socketHealth = context.createSocket(ZMQ.REP);
             socketHealth.bind("tcp://*:5559");
-            socketHealth.setReceiveTimeOut(10);
+            socketHealth.setReceiveTimeOut(500);
 
             while (!Thread.currentThread().isInterrupted()) {
                 // Block until a message is received

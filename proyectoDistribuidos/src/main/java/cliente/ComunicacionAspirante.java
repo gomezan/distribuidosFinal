@@ -37,7 +37,8 @@ public class ComunicacionAspirante {
             System.out.println("Estoy suscrito, espero mensajes");
             ZMQ.Socket subscriber  = context.createSocket(SocketType.SUB);
             subscriber.connect("tcp://localhost:5556");
-
+            //subscriber.connect("tcp://25.13.204.246:5556");
+            
             String filter = "IngenieriaSolicitud ";
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
             
@@ -103,7 +104,7 @@ public class ComunicacionAspirante {
            //  Comunicación Filtro
             System.out.println("aspirante comunicandose");
             ZMQ.Socket socket = context.createSocket(SocketType.REQ);
-            socket.connect("tcp://localhost:5555");
+            socket.connect("tcp://25.4.189.185:5555");
  
             //Envia solicitud
             String request2 = "gomezan-97080703620-agregarSolicitud-";

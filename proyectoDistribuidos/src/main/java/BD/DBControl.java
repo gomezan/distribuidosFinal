@@ -123,6 +123,7 @@ public class DBControl {
         String cargo = ofert.getCargo();
         int idEmpleador = ofert.getIDempleador();
         int idSector = ofert.getIDSector();
+        System.out.println("añadir"+cargo+" "+idEmpleador+" "+idSector);
         try(	            
             Connection  conexDHT= (Connection) DBconnect.getConnection();
             PreparedStatement ps = (PreparedStatement) conexDHT.prepareStatement("INSERT INTO `dht`.`ofertas` ( `Cargo`, `IDEmpleador`, `IDSector`) VALUES ( '"+cargo+"', '"+idEmpleador+"', '"+idSector+"');");

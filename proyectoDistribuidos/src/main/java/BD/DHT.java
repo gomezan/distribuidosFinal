@@ -227,6 +227,8 @@ public class DHT {
     
     public static void actualizaOfertas(List<Oferta> ofertas){
         ofertas.forEach((ofet) -> {
+            //ofet.setIDempleador(1);
+            System.out.println(ofet.getCargo()+" "+ofet.getIDempleador());
             DBControl.addOferta(ofet);
         });   
     }
@@ -241,6 +243,9 @@ public class DHT {
         //var ofer = ofertaSecto.values();
         System.out.println("Tamao"+mapaOfertas.size());
         for ( Integer key : mapaOfertas.keySet() ) {
+            if(mapaSolicitud.containsKey(key)){
+            
+            }
             System.out.println("llave "+ key );
         }
     }
