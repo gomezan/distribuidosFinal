@@ -30,16 +30,20 @@ public class Servidor {
     {
         DHT dhtServ = new DHT();
         DHT dht = new DHT();
-        Map<Integer,Oferta> ofertaXSector = new HashMap<>();
-        DHT.agregarOferta(dht.getOfertasdeBD());
         
+        Map<Integer,Oferta> ofertaXSector = new HashMap<>();
+        DHT.agregarOferta(dht.getOfertasdeBD()); 
+        DHT.dhtSerOferSector();
+        ofertaXSector =  DHT.getOfertaSectoS();
         
         Map<Integer,Solicitud> solicitudSectorS=new HashMap<>();
         DHT.agregarSolicitud(dht.getSolicitudesBD());
+        solicitudSectorS =  DHT.getSolicitudSectorS();
         
         var ofer = ofertaXSector.values();
+        System.out.println("ofertas en dht:");
         ofer.forEach((ofet) -> {
-            System.out.println(ofet.getCargo()+"HHHHHHHHHHHH");      
+            System.out.println(ofet.getCargo());      
         });
         
         Map<Integer,Oferta> recibeMap;
@@ -77,11 +81,8 @@ public class Servidor {
                     System.out.println(habilidade.getNombre() + "\n Con experiencia: " + habilidade.getAnios() + "anios");
                */
                 String response = "Hello, world!";
-                String sha256hex = Hashing.sha256()
-                .hashString(response, StandardCharsets.UTF_8)
-                .toString();
-
-                socket.send(sha256hex.getBytes(ZMQ.CHARSET), 0);
+                
+                socket.send(response.getBytes(ZMQ.CHARSET), 0);
             }
         }   
 //ofertaXSector = DHT.getOfertaSectoS();
