@@ -73,7 +73,7 @@ public class Servidor {
                     try (
                             ObjectInputStream is = new ObjectInputStream(bs);) {
                         listaOfertas = (ArrayList<Oferta>) is.readObject();
-                        //DHT.actualizaOfertas(listaOfertas);
+                        DHT.actualizaOfertas(listaOfertas);
                     } catch (IOException ioe) {
                         System.out.println(ioe);
                     }

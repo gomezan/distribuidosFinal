@@ -77,7 +77,8 @@ public class ComunicacionEmpleador {
             //  Comunicación Filtro
             System.out.println("Connecting to hello world server");
             ZMQ.Socket socket = context.createSocket(SocketType.REQ);
-            socket.connect("tcp://localhost:5555");
+            //socket.connect("tcp://25.4.189.185:5555");
+            socket.connect("tcp://25.4.192.51:5555");
             
 
             ZMQ.Socket socketServer = context.createSocket(SocketType.REP);
@@ -98,7 +99,9 @@ public class ComunicacionEmpleador {
 
                 Oferta oferta = new Oferta();
                 oferta.setId(1);
-                oferta.setCargo("Secretaria");
+                oferta.setIDempleador(1);
+                oferta.setIDSector(1);
+                oferta.setCargo("Contador");
 
                 enviarOferta(socket, oferta);
 
