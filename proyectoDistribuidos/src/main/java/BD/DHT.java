@@ -41,6 +41,7 @@ public class DHT {
 
      //Indicador de servidores
     static int NumServidor = 1;
+    static int indice = 0;
     public DHT() {
     }
 
@@ -165,8 +166,7 @@ public class DHT {
     public static void dhtSerOferSector(){
         ofertaSectoS = new HashMap<>();
         int tamanio = ofertaSecto.size();
-        int partes = tamanio/3;
-        int indice=0;
+        int partes = tamanio/3;        
         var ofer = ofertaSecto.values();
         ofer.forEach((ofet) -> {
             if((NumServidor == 1) && (indice < partes)){
@@ -175,15 +175,16 @@ public class DHT {
                 ofertaSectoS.put(ofet.getIDSector(),ofet);                
             }else if((NumServidor == 3) && (indice >= partes*2)){
                 ofertaSectoS.put(ofet.getIDSector(),ofet);                    
-            }      
+            }
+            indice++;
         });
+        indice = 0;
     } 
     
     public static void dhtSerAspSector(){
         aspiranteSectorS=new HashMap<>();
         int tamanio = aspiranteSector.size();
         int partes = tamanio/3;
-        int indice=0;
         var ofer = aspiranteSector.values();
         ofer.forEach((ofet) -> {
             if((NumServidor == 1) && (indice < partes)){
@@ -192,15 +193,16 @@ public class DHT {
                 aspiranteSectorS.put(ofet.getCodigo(),ofet);                
             }else if((NumServidor == 3) && (indice >= partes*2)){
                 aspiranteSectorS.put(ofet.getCodigo(),ofet);                    
-            }      
+            } 
+            indice++;
         }); 
+        indice=0;
     }
     
     public static DHT dhtSerOferSector(DHT dht){
         solicitudSectorS=new HashMap<>();
         int tamanio = solicitudSector.size();
         int partes = tamanio/3;
-        int indice=0;
         var ofer = solicitudSector.values();
         ofer.forEach((ofet) -> {
             if((NumServidor == 1) && (indice < partes)){
@@ -209,7 +211,8 @@ public class DHT {
                 solicitudSectorS.put(ofet.getIdSector(),ofet);                
             }else if((NumServidor == 3) && (indice >= partes*2)){
                 solicitudSectorS.put(ofet.getIdSector(),ofet);                    
-            }      
+            }  
+            indice++;
         });
         NumServidor++;
         return null;    
