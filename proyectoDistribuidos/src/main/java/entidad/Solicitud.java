@@ -12,15 +12,34 @@ package entidad;
 public class Solicitud {
       //Atributos
     private int codigo;
+    private int idSector;
     private Aspirante aspirante;
     
     //Constructor
+
+    public Solicitud() {
+    }
 
     public Solicitud(int codigo) {
         this.codigo = codigo;
     }
     
+    public int getIdSector() {
+        return idSector;
+    }
+
+    public void setIdSector(int idSector) {
+        this.idSector = idSector;
+    }
+
+    public Aspirante getAspirante() {
+        return aspirante;
+    }
+
     //Metodos
+    public void setAspirante(Aspirante aspirante) {    
+        this.aspirante = aspirante;
+    }
 
     public int getCodigo() {
         return codigo;

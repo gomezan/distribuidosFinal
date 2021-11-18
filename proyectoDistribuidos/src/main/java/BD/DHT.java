@@ -5,8 +5,7 @@
  */
 package BD;
 
-import entidad.Aspirante;
-import entidad.Oferta;
+import entidad.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +19,11 @@ public class DHT {
     
     static Map<Integer,Oferta> ofertaSecto=new HashMap<>(); 
     static Map<Integer,Aspirante> aspiranteSector=new HashMap<>();
+    static Map<Integer,Solicitud> solicitudSector=new HashMap<>();
     DBconnect dbConn = new DBconnect();
     DBControl dbCont = new DBControl(dbConn);
     List<Oferta> ofertasdeBD = DBControl.getOfertas();
+    List<Solicitud> solicitudesBD = DBControl.getSolicitudes();
 
     public DHT() {
     }
@@ -74,17 +75,15 @@ public class DHT {
         DBconnect dbConn = new DBconnect();
         DBControl dbCont = new DBControl(dbConn);
         
-        List<Oferta> ofertasdeBD = DBControl.getOfertas();
-        
+        List<Oferta> ofertasdeBD = DBControl.getOfertas();     
     }
     
     
-    public boolean relOferXSec(){
-        
-        
+    public boolean relOferXSec(){ 
         return false;
         
     }
+    
     public static void agregarOferta(List<Oferta> oferta)
     {
         for(Oferta ofer : oferta){           
@@ -92,4 +91,10 @@ public class DHT {
         }
     }
     
+    public static void agregarSolicitud(List<Solicitud> solicitudes)
+    {
+        for(Solicitud sol: solicitudes){           
+            solicitudSector.put(sol.getIdSector(), sol);
+        }
+    }
 }
