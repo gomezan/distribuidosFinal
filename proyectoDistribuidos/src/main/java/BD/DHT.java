@@ -87,18 +87,9 @@ public class DHT {
     }
     public static void agregarOferta(List<Oferta> oferta)
     {
-       // Map<Integer , Oferta> docUsuario = new HashMap<>();
         for(Oferta ofer : oferta){           
             ofertaSecto.put(ofer.getIDSector(), ofer);
         }
-        /*ApiFuture<WriteResult> future = bd.collection("ofertas").document(Integer.toString(oferta.getidOferta())).set(docUsuario);
-        try {
-        //   System.out.println("Ofertas Update : " + future.get().getUpdateTime());
-        } catch (InterruptedException | ExecutionException e) {
-        //e.printStackTrace();
-        return false;
-        }*/        
- 
     }
     
 }
